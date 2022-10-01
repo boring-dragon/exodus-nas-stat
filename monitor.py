@@ -73,8 +73,9 @@ while True:
     cmd = "free -m | awk 'NR==2{printf \"%.2f%%\", $3*100/$2 }'"    
     MemUsage = subprocess.check_output(cmd, shell = True )
     
-    cmd = "df -h | awk '$NF==\"/\"{printf \"HDD: %d/%dGB %s\", $3,$2,$5}'"
-    cmd = "df -h | awk '$NF==\"/\"{printf \"%d/%dGB\", $3,$2}'"
+    #cmd = "df -h | awk '$NF==\"/\"{printf \"HDD: %d/%dGB %s\", $3,$2,$5}'"
+    #cmd = "df -h | awk '$NF==\"/\"{printf \"%d/%dGB\", $3,$2}'"
+    cmd = "df -h --total | tail -n 1 | awk '{printf \"%s/100%  \",$5}'"
     Disk = subprocess.check_output(cmd, shell = True )
     
     cmd = "vcgencmd measure_temp | cut -d '=' -f 2 | head --bytes -1"
